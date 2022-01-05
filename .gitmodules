@@ -1,0 +1,24 @@
+[submodule "nginx"]
+	path = nginx
+	url = https://github.com/nginx/nginx
+[submodule "pcre2"]
+	path = pcre2
+	url = https://github.com/PhilipHazel/pcre2
+[submodule "njs"]
+	path = njs
+	url = https://github.com/nginx/njs
+[submodule "nginx-http-auth-digest"]
+	path = nginx-http-auth-digest
+	url = https://github.com/samizdatco/nginx-http-auth-digest
+[submodule "ngx-fancyindex"]
+	path = ngx-fancyindex
+	url = https://github.com/wxx9248/ngx-fancyindex
+[submodule "ngx_brotli"]
+	path = ngx_brotli
+	url = https://github.com/google/ngx_brotli
+[submodule "zlib"]
+	path = zlib
+	url = https://github.com/madler/zlib
+[submodule "libressl"]
+	path = libressl
+	url = https://github.com/libressl-portable/portable
