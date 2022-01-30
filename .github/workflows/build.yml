@@ -13,7 +13,6 @@ jobs:
         # The type of runner that the job will run on
         runs-on: ubuntu-20.04
         env:
-            TEMP_DIR_NAME: .temp
             CONFIGURE_ARGS: >
                 --prefix=/etc/nginx
                 --sbin-path=/usr/sbin/nginx
@@ -81,11 +80,11 @@ jobs:
               
             - name: Install libgd
               run: |
-                sudo apt install libgd-dev
+                sudo apt install -y libgd-dev
                 
             - name: Install libgeoip
               run: |
-                sudo apt install libgeoip-dev
+                sudo apt install -y libgeoip-dev
             
             - name: Configure nginx
               run: |
@@ -120,3 +119,40 @@ jobs:
               with:
                 name: nginx-${{runner.os}}-${{runner.arch}}-${{github.sha}}
                 path: nginx/objs/nginx
+            
+            - name: Build ARM64 version
+              uses: uraimo/run-on-arch-action@v2
+              with:
+                arch: aarch64
+                distro: ubuntu20.04
+                dockerRunArgs: |
+                  --volume ".:/workspace"
+                env: |
+                  CONFIGURE_ARGS: ${{CONFIGURE_ARGS}}
+                shell: /bin/bash
+                install: |
+                    sudo apt update
+                    sudo apt upgrade -y
+                    sudo apt install -y git build-essential binutil diffutil libgd-dev libgeoip-dev
+                run: |
+                    cd /workspace
+                    make clean
+                    
+                    cd nginx
+                    ./auto/configure $CONFIGURE_ARGS --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'
+                    cd ..
+                    
+                    cd pcre2
+                    ./autogen.sh
+                    cd ..
+                    
+                    cd libressl
+                    ./autogen.sh
+                    cd ..
+                    
+                    cd nginx
+                    make -j$(nproc)
+                    cd ..
+                    
+                    strip --strip-unneeded nginx/objs/nginx
+                    
