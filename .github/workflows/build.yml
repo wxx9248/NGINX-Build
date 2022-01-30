@@ -117,7 +117,7 @@ jobs:
             - name: Upload artifact
               uses: actions/upload-artifact@v2.3.1
               with:
-                name: nginx-${{runner.os}}-${{runner.arch}}-${{github.sha}}
+                name: nginx-${{runner.os}}-amd64-${{github.sha}}
                 path: nginx/objs/nginx
             
             - name: Build ARM64 version
@@ -155,4 +155,10 @@ jobs:
                     cd ..
                     
                     strip --strip-unneeded nginx/objs/nginx
-                    
+            
+            - name: Upload artifact (ARM64)
+              uses: actions/upload-artifact@v2.3.1
+              with:
+                name: nginx-${{runner.os}}-arm64-${{github.sha}}
+                path: nginx/objs/nginx
+            
