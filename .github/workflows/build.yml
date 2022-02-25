@@ -1,5 +1,5 @@
 name: build
-'on':
+on:
   push:
     branches:
       - master
@@ -68,7 +68,7 @@ jobs:
             yes | unminimize
             apt update -y;
             apt upgrade -y;
-            apt install -y build-essential binutils diffutils git libgd-dev libgeoip-dev libtool;
+            apt install -y build-essential binutils diffutils git libgd-dev libgeoip-dev libtool gawk;
           run: >
             cat /home/runner/work/_actions/uraimo/run-on-arch-action/v2.1.1/src/run-on-arch.sh;
             cd /workspace;
