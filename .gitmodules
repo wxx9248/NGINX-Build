@@ -13,12 +13,12 @@
 [submodule "ngx-fancyindex"]
 	path = ngx-fancyindex
 	url = https://github.com/wxx9248/ngx-fancyindex
-[submodule "ngx_brotli"]
-	path = ngx_brotli
-	url = https://github.com/google/ngx_brotli
 [submodule "zlib"]
 	path = zlib
 	url = https://github.com/madler/zlib
 [submodule "libressl"]
 	path = libressl
 	url = https://github.com/libressl-portable/portable
+[submodule "ngx_brotli"]
+	path = ngx_brotli
+	url = https://github.com/wxx9248/ngx_brotli
