@@ -5,7 +5,7 @@ Automatic custom build of nginx with GitHub Actions
 | Components | Commit Tag |
 |--|--|
 | NGINX | release-1.21.6 |
-| LibreSSL | v3.5.1 |
+| LibreSSL | b2c5988 |
 | PCRE2 | pcre2-10.40 |
 | zlib | v1.2.12 |
 | njs | 0.7.3 |
