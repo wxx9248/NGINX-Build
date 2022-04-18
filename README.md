@@ -6,9 +6,10 @@ Automatic custom build of nginx with GitHub Actions
 |--|--|
 | NGINX | release-1.21.6 |
 | LibreSSL | v3.5.1 |
-| PCRE2 | pcre2-10.39 |
-| zlib | v1.2.11 |
-| njs | 0.7.2 |
+| PCRE2 | pcre2-10.40 |
+| zlib | v1.2.12 |
+| njs | 0.7.3 |
 | ngx_brotli | cb23e22 |
+| - brotli | f4153a0 |
 | nginx-http-auth-digest | 823853c |
 | ngx-fancyindex | 33b2562 |
