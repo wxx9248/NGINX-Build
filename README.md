@@ -5,11 +5,11 @@ Automatic custom build of nginx with GitHub Actions
 | Components | Commit Tag |
 |--|--|
 | NGINX | release-1.21.6 |
-| LibreSSL | b2c5988 |
+| LibreSSL | v3.5.2 |
 | PCRE2 | pcre2-10.40 |
 | zlib | v1.2.12 |
 | njs | 0.7.3 |
-| ngx_brotli | cb23e22 |
+| ngx_brotli | 6e975bc |
 | - brotli | f4153a0 |
 | nginx-http-auth-digest | 823853c |
 | ngx-fancyindex | 33b2562 |
