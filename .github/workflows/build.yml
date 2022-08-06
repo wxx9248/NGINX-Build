@@ -16,6 +16,7 @@ jobs:
         uses: egor-tensin/setup-gcc@v1
       - name: Install libgd
         run: |
+          sudo apt remove -y libgd3 nginx
           sudo apt install -y libgd-dev
       - name: Install libgeoip
         run: |
