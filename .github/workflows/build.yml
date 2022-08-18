@@ -287,7 +287,55 @@ jobs:
         with:
           name: 'nginx-archlinux-latest-arm64-${{github.sha}}'
           path: nginx/objs/nginx
-
+  
+  build-macos-latest-amd64:
+    runs-on: macos-12
+    steps:
+      - name: Checks-out repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Install Homebrew
+        run: >
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      - name: Install essential build tools
+        run: >
+          brew install automake
+      - name: Install libgd
+        run: >
+          brew install libgd
+      - name: Install libgeoip
+        run: >
+          brew install libgeoip
+      - name: Configure nginx
+        run: >
+          cd nginx;
+          NGINX_VERSION=$(git show -s --format=%s | sed -n 's/nginx\-\(.*\)\-RELEASE/\1/p');
+          ./auto/configure --prefix=/opt/homebrew/Cellar/nginx/$NGINX_VERSION --sbin-path=/opt/homebrew/Cellar/nginx/$NGINX_VERSION/bin/nginx --conf-path=/opt/homebrew/etc/nginx/nginx.conf --pid-path=/opt/homebrew/var/run/nginx.pid --lock-path=/opt/homebrew/var/run/nginx.lock --http-client-body-temp-path=/opt/homebrew/var/run/nginx/client_body_temp --http-proxy-temp-path=/opt/homebrew/var/run/nginx/proxy_temp --http-fastcgi-temp-path=/opt/homebrew/var/run/nginx/fastcgi_temp --http-uwsgi-temp-path=/opt/homebrew/var/run/nginx/uwsgi_temp --http-scgi-temp-path=/opt/homebrew/var/run/nginx/scgi_temp --http-log-path=/opt/homebrew/var/log/nginx/access.log --error-log-path=/opt/homebrew/var/log/nginx/error.log --with-compat --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-pcre-jit --with-http_geoip_module --with-http_flv_module --with-http_image_filter_module --with-http_mp4_module --with-stream_geoip_module --add-module=../ngx_brotli --add-module=../ngx-fancyindex --add-module=../nginx-http-auth-digest --add-module=../njs/nginx --with-openssl=../libressl --with-pcre=../pcre2 --with-zlib=../zlib --with-cc-opt='-I/opt/homebrew/opt/libgeoip/include -I/opt/homebrew/opt/libgd/include' --with-ld-opt='-L/opt/homebrew/opt/libgeoip/lib -L/opt/homebrew/opt/libgd/lib';
+          cd ..;
+      - name: Configure pcre2
+        run: |
+          cd pcre2;
+          ./autogen.sh;
+          cd ..;
+      - name: Configure libressl
+        run: |
+          cd libressl;
+          ./autogen.sh;
+          cd ..;
+      - name: Compile nginx
+        run: |
+          cd nginx;
+          make -j$(nproc);
+          cd ..;
+      - name: Strip binary
+        run: |
+          strip nginx/objs/nginx;
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'nginx-macos-latest-amd64-${{github.sha}}'
+          path: nginx/objs/nginx
   release:
     needs:
       - build-ubuntu-2004-amd64
@@ -296,6 +344,7 @@ jobs:
       - build-ubuntu-2204-arm64
       - build-archlinux-latest-amd64
       - build-archlinux-latest-arm64
+      - build-macos-latest-amd64
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
