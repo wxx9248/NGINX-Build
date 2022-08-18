@@ -287,3 +287,37 @@ jobs:
         with:
           name: 'nginx-archlinux-latest-arm64-${{github.sha}}'
           path: nginx/objs/nginx
+
+  release:
+    needs:
+      - build-ubuntu-2004-amd64
+      - build-ubuntu-2004-arm64
+      - build-ubuntu-2204-amd64
+      - build-ubuntu-2204-arm64
+      - build-archlinux-latest-amd64
+      - build-archlinux-latest-arm64
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts/
+      - name: Gathering artifacts
+        run: >
+          cd artifacts;
+          for NAME in *;
+          do
+              cp $NAME/nginx ../$NAME;
+          done;
+          cd ..;
+          rm -rf artifacts;
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          draft: false
+          prerelease: false
+          automatic_release_tag: latest
+          files: |
+            *
