@@ -8,7 +8,7 @@ Automatic custom build of nginx with GitHub Actions
 | LibreSSL | v3.5.3 |
 | PCRE2 | pcre2-10.40 |
 | zlib | v1.2.12 |
-| njs | 0.7.6 |
+| njs | 0.7.7 |
 | ngx_brotli | 6e975bc |
 | - brotli | f4153a0 |
 | nginx-http-auth-digest | master |
