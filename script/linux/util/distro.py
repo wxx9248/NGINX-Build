@@ -24,7 +24,8 @@ UBUNTU_PACKAGE_NAME_DICT = {
     "libxslt": "libxslt-dev",
     "bash": "bash",
     "autoconf": "autoconf",
-    "automake": "automake"
+    "automake": "automake",
+    "linux-headers": "linux-headers-generic"
 }
 
 DISTRO_PACKAGE_NAME_DICT = {
@@ -44,7 +45,8 @@ DISTRO_PACKAGE_NAME_DICT = {
         "libxslt": "libxslt",
         "bash": "bash",
         "autoconf": "autoconf",
-        "automake": "automake"
+        "automake": "automake",
+        "linux-headers": "linux-headers"
     },
     "alpine": {
         "build-essential": "alpine-sdk",
@@ -60,7 +62,8 @@ DISTRO_PACKAGE_NAME_DICT = {
         "libxslt": "libxslt-dev",
         "bash": "bash",
         "autoconf": "autoconf",
-        "automake": "automake"
+        "automake": "automake",
+        "linux-headers": "linux-headers"
     }
 }
 
