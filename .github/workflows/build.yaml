@@ -41,5 +41,34 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: 'nginx-${{matrix.distro}}-${{matrix.architecture}}-${{github.sha}}'
+          name: 'nginx-${{matrix.distro}}-${{matrix.arch}}-${{github.sha}}'
           path: ./workspace/nginx/objs/nginx
+
+  release:
+    needs:
+      - build-linux
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts/
+      - name: Gathering artifacts
+        run: >
+          cd artifacts;
+          for NAME in *;
+          do
+              cp $NAME/nginx ../$NAME;
+          done;
+          cd ..;
+          rm -rf artifacts;
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          draft: false
+          prerelease: false
+          automatic_release_tag: latest
+          files: |
+            *
