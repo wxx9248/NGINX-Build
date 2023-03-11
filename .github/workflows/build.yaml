@@ -1,0 +1,74 @@
+name: build
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build-linux:
+    strategy:
+      matrix:
+        distro: ["focal", "jammy", "archlinux", "alpine"]
+        arch: ["amd64", "aarch64"]
+    runs-on: ubuntu-latest
+    env:
+      BUILD_DISTRO: ${{matrix.distro}}
+      BUILD_ARCH: ${{matrix.arch}}
+    steps:
+      - name: Checks-out repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Docker Setup QEMU
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: "arm64"
+      - name: Setup Python and pip
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip"
+      - name: Setup Python dependencies
+        run: |
+          pip install -r ./script/linux/requirements.txt
+      - name: Running build script
+        run: |
+          python3 ./script/linux/main.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'nginx-${{matrix.distro}}-${{matrix.arch}}-${{github.sha}}'
+          path: ./workspace/nginx/objs/nginx
+
+  release:
+    needs:
+      - build-linux
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts/
+      - name: Gathering artifacts
+        run: >
+          cd artifacts;
+          for NAME in *;
+          do
+              cp $NAME/nginx ../$NAME;
+          done;
+          cd ..;
+          rm -rf artifacts;
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          draft: false
+          prerelease: false
+          automatic_release_tag: latest
+          files: |
+            *
