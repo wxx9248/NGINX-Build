@@ -4,7 +4,7 @@ from package_manager.model import PackageManagerCommandGenerator, PackageManager
 
 class AptCommandGenerator(PackageManagerCommandGenerator):
     def __init__(self):
-        super().__init__("apt", {
+        super().__init__("apt-get", {
             PackageManagerVerb.UPDATE: "update",
             PackageManagerVerb.UPGRADE: "upgrade -y",
             PackageManagerVerb.INSTALL: "install -y",

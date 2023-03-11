@@ -67,6 +67,10 @@ def main(argc: int, argv: typing.List[str]):
         tag,
         f"sh -x ./{BUILD_SCRIPT_NAME}",
         auto_remove=True,
+        environment={
+            "DEBIAN_FRONTEND": "noninteractive",
+            "TZ": "Etc/UTC"
+        },
         privileged=True,
         volumes={
             f"{os.getcwd()}/{WORKSPACE_PATH_HOST}": {
