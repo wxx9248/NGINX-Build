@@ -10,9 +10,6 @@
 [submodule "nginx-http-auth-digest"]
 	path = workspace/nginx-http-auth-digest
 	url = https://github.com/samizdatco/nginx-http-auth-digest
-[submodule "ngx-fancyindex"]
-	path = workspace/ngx-fancyindex
-	url = https://github.com/wxx9248/ngx-fancyindex
 [submodule "zlib"]
 	path = workspace/zlib
 	url = https://github.com/madler/zlib
