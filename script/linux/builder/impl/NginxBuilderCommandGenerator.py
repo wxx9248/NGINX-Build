@@ -40,7 +40,6 @@ CONFIGURE_FLAGS_COMMON = [
     "--with-stream_ssl_preread_module",
 
     "--add-module=../nginx-http-auth-digest",
-    "--add-module=../nginx-rtmp-module",
     "--add-module=../ngx-fancyindex",
     "--add-module=../ngx_brotli",
     "--add-module=../njs/nginx",

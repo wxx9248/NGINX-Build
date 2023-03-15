@@ -22,6 +22,3 @@
 [submodule "libressl"]
 	path = workspace/libressl
 	url = https://github.com/libressl-portable/portable
-[submodule "nginx-rtmp-module"]
-	path = workspace/nginx-rtmp-module
-	url = https://github.com/arut/nginx-rtmp-module
