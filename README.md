@@ -12,4 +12,3 @@ Automatic custom build of nginx with GitHub Actions
 | ngx_brotli | 6e975bc |
 | - brotli | f4153a0 |
 | nginx-http-auth-digest | master |
-| ngx-fancyindex | master |
