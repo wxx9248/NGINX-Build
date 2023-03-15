@@ -65,7 +65,7 @@ def main(argc: int, argv: typing.List[str]):
     client = docker.from_env()
     container: Container = client.containers.run(
         tag,
-        f"sh -x ./{BUILD_SCRIPT_NAME}",
+        f"sh -e -x ./{BUILD_SCRIPT_NAME}",
         auto_remove=True,
         environment={
             "DEBIAN_FRONTEND": "noninteractive",
