@@ -41,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: 'nginx-${{matrix.distro}}-${{matrix.arch}}-${{github.sha}}'
+          name: 'nginx-${{matrix.distro}}-${{matrix.arch}}'
           path: ./workspace/nginx/objs/nginx
 
   release:
