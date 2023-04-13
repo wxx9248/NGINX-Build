@@ -84,7 +84,12 @@ def main(argc: int, argv: typing.List[str]):
     console = container.attach(stdout=True, stderr=True, stream=True, logs=True)
     line: bytes
     for line in console:
-        print(line.decode(), end='')
+        logging.info(line)
+
+    exit_code = container.wait()['StatusCode']
+    if exit_code != 0:
+        logger.fatal(f"Container exited with non-zero code {exit_code}")
+        exit(exit_code)
 
 
 if __name__ == "__main__":
