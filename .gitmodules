@@ -1,21 +1,21 @@
-[submodule "nginx"]
+[submodule "workspace/libressl"]
+	path = workspace/libressl
+	url = https://github.com/libressl/portable
+[submodule "workspace/nginx"]
 	path = workspace/nginx
 	url = https://github.com/nginx/nginx
-[submodule "pcre2"]
-	path = workspace/pcre2
-	url = https://github.com/PhilipHazel/pcre2
-[submodule "njs"]
-	path = workspace/njs
-	url = https://github.com/nginx/njs
-[submodule "nginx-http-auth-digest"]
+[submodule "workspace/nginx-http-auth-digest"]
 	path = workspace/nginx-http-auth-digest
 	url = https://github.com/samizdatco/nginx-http-auth-digest
-[submodule "zlib"]
+[submodule "workspace/ngx_brotli"]
+	path = workspace/ngx_brotli
+	url = https://github.com/wxx9248/ngx_brotli
+[submodule "workspace/njs"]
+	path = workspace/njs
+	url = https://github.com/nginx/njs
+[submodule "workspace/pcre2"]
+	path = workspace/pcre2
+	url = https://github.com/PCRE2Project/pcre2
+[submodule "workspace/zlib"]
 	path = workspace/zlib
 	url = https://github.com/madler/zlib
-[submodule "ngx_brotli"]
-	path = workspace/ngx_brotli
-	url = https://github.com/google/ngx_brotli
-[submodule "libressl"]
-	path = workspace/libressl
-	url = https://github.com/libressl-portable/portable
