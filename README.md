@@ -9,6 +9,6 @@ Automatic custom build of nginx with GitHub Actions
 | PCRE2 | pcre2-10.42 |
 | zlib | v1.2.13 |
 | njs | 0.7.12 |
-| ngx_brotli | 6e975bc |
-| - brotli | f4153a0 |
+| ngx_brotli | master |
+| - brotli | ed1995b |
 | nginx-http-auth-digest | 823853c |
