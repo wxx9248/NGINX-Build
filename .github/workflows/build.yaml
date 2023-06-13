@@ -10,6 +10,7 @@ on:
 
 jobs:
   build-linux:
+    if: ${{ github.ref != 'refs/heads/master' || github.actor != 'dependabot[bot]' }}
     strategy:
       matrix:
         distro: ["focal", "jammy", "archlinux", "alpine"]
@@ -48,7 +49,7 @@ jobs:
     needs:
       - build-linux
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v3
