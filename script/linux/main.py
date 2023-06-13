@@ -84,7 +84,7 @@ def main(argc: int, argv: typing.List[str]):
     console = container.attach(stdout=True, stderr=True, stream=True, logs=True)
     line: bytes
     for line in console:
-        logging.info(line.decode(errors="backslashreplace"))
+        logging.info(line.decode(errors="backslashreplace")[:-1])
 
     exit_code = container.wait()['StatusCode']
     if exit_code != 0:
