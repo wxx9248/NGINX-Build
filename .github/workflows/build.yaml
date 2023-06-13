@@ -8,6 +8,9 @@ on:
     branches:
       - '**'
 
+permissions:
+  contents: write
+
 jobs:
   build-linux:
     if: ${{ github.ref != 'refs/heads/master' || github.actor != 'dependabot[bot]' }}
