@@ -27,6 +27,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
+      - name: Applying patches
+        run: |
+          bash ./patches/apply.sh
       - name: Docker Setup QEMU
         uses: docker/setup-qemu-action@v2
         with:
