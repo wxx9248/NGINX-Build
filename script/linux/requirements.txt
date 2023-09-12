@@ -5,4 +5,4 @@ idna==3.4
 packaging==23.1
 requests==2.31.0
 urllib3==1.26.16
-websocket-client==1.6.2
+websocket-client==1.6.3
