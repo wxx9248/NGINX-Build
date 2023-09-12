@@ -16,7 +16,7 @@ jobs:
     if: ${{ github.ref != 'refs/heads/master' || github.actor != 'dependabot[bot]' }}
     strategy:
       matrix:
-        distro: ["focal", "jammy", "archlinux", "alpine"]
+        distro: ["jammy", "archlinux", "alpine"]
         arch: ["amd64", "aarch64"]
     runs-on: ubuntu-latest
     env:
