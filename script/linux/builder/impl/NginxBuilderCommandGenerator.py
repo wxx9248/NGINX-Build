@@ -102,11 +102,11 @@ CONFIGURE_FLAGS_EXTRA = {
     ],
     ((r"archlinux", r".*"), (r"amd64", r"")): [
         "--with-cc-opt='-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection -flto'",
-        "--with-ld-opt='-Wl,-O1,--sort-common.py,--as-needed,-z,relro,-z,now -flto'"
+        "--with-ld-opt='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -flto=auto'"
     ],
     ((r"archlinux", r".*"), (r"arm64", r"v8")): [
         "--with-cc-opt='-march=armv8-a -O2 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fstack-clash-protection'",
-        "--with-ld-opt='-Wl,-O1,--sort-common.py,--as-needed,-z,relro,-z,now'"
+        "--with-ld-opt='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now'"
     ],
     ((r"alpine", r".*"), (r".*", r".*")): [
         "--prefix=/var/lib/nginx",
