@@ -1,0 +1,19 @@
+name: Release Docker Image
+on:
+  workflow_call:
+    inputs:
+      run_id:
+        required: true
+        type: string
+
+permissions:
+  packages: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts/

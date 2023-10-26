@@ -1,0 +1,46 @@
+name: Build Linux Binary
+on:
+  workflow_call:
+    inputs:
+      distro:
+        required: true
+        type: string
+      arch:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    env:
+      BUILD_DISTRO: ${{ inputs.distro }}
+      BUILD_ARCH: ${{ inputs.arch }}
+    steps:
+      - name: Checks-out repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Applying patches
+        run: |
+          bash ./patches/apply.sh
+      - name: Docker Setup QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Python and pip
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Setup Python dependencies
+        run: |
+          pip3 install -r ./script/linux/requirements.txt
+      - name: Running build script
+        run: |
+          python3 ./script/linux/main.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nginx-${{ input.distro }}-${{ input.arch }}
+          path: ./workspace/nginx/objs/nginx

@@ -1,0 +1,37 @@
+name: Release Linux Binary
+on:
+  workflow_call:
+    inputs:
+      run_id:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts/
+      - name: Gathering artifacts
+        run: |
+          cd artifacts
+          for NAME in *
+          do
+              cp $NAME/nginx ../$NAME
+          done;
+          cd ..
+          rm -rf artifacts
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
+          automatic_release_tag: latest
+          files: |
+            *

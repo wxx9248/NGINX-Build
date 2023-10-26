@@ -1,0 +1,13 @@
+name: Build Linux Assembly
+on: pull_request
+
+jobs:
+  main:
+    strategy:
+      matrix:
+        distro: [ubuntu/jammy, archlinux]
+        arch: [amd64, arm64/v8]
+    uses: ./.github/workflows/build-linux-binary.yaml
+    with:
+      distro: ${{ matrix.distro }}
+      arch: ${{ matrix.arch }}
