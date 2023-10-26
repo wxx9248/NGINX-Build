@@ -1,6 +1,9 @@
 name: Build Docker Assembly
 on: pull_request
 
+permissions:
+  contents: write
+
 jobs:
   main:
     strategy:
