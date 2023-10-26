@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import typing
 
+from platform_specific import DistroType, ArchType
+
 
 class BuilderCommandGenerator:
-    def __init__(self, distro: str, arch: str):
+    def __init__(self, distro: DistroType, arch: ArchType):
         self.__distro = distro
         self.__arch = arch
 
