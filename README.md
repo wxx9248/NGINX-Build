@@ -4,11 +4,11 @@ Automatic custom build of nginx with GitHub Actions
 ## Current Version
 | Components | Commit Tag |
 |--|--|
-| NGINX | release-1.25.2 |
+| NGINX | release-1.25.3 |
 | LibreSSL | v3.8.1 |
 | PCRE2 | pcre2-10.42 |
 | zlib | v1.3 |
-| njs | 0.8.1 |
+| njs | 0.8.2 |
 | ngx_brotli | master |
-| - brotli | 63402aa |
+| - brotli | 9b83be2 |
 | nginx-http-auth-digest | 823853c |
