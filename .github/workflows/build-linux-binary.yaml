@@ -42,5 +42,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: nginx-${{ inputs.distro }}-${{ inputs.arch }}
+          name: nginx-${{ inputs.distro.replaceAll('/', '-') }}-${{ inputs.arch.replaceAll('/', '-') }}
           path: ./workspace/nginx/objs/nginx
