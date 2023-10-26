@@ -7,16 +7,16 @@ DistroType: typing.TypeAlias = typing.Tuple[str, str]
 ArchType: typing.TypeAlias = typing.Tuple[str, str]
 
 distro_dict: typing.Dict[str, DistroType] = {
-    "ubuntu/jammy": ("ubuntu", "jammy"),
+    "ubuntu@jammy": ("ubuntu", "jammy"),
     "archlinux": ("archlinux", ""),
     "alpine": ("alpine", "")
 }
 
 arch_dict: typing.Dict[str, ArchType] = {
     "amd64": ("amd64", ""),
-    "arm64/v8": ("arm64", "v8"),
-    "arm32/v6": ("arm32", "v6"),
-    "arm32/v7": ("arm32", "v7"),
+    "arm64@v8": ("arm64", "v8"),
+    "arm32@v6": ("arm32", "v6"),
+    "arm32@v7": ("arm32", "v7"),
     "i386": ("i386", ""),
     "ppc64le": ("ppc64le", ""),
     "s390x": ("s390x", "")
