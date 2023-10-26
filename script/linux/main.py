@@ -9,7 +9,7 @@ import docker
 from docker.models.containers import Container
 
 import builder.impl
-import util
+import platform_specific
 
 WORKSPACE_PATH_HOST = "workspace"
 WORKSPACE_PATH_CONTAINER = "/workspace"
@@ -23,15 +23,18 @@ def main(argc: int, argv: typing.List[str]):
 
     logger.debug(f"Current working directory: {os.getcwd()}")
 
-    distro = os.environ.get("BUILD_DISTRO")
-    arch = os.environ.get("BUILD_ARCH")
+    distro_string = os.environ.get("BUILD_DISTRO")
+    arch_string = os.environ.get("BUILD_ARCH")
 
-    logger.debug(f"Build on distro: {distro}")
-    logger.debug(f"Build on architecture: {arch}")
+    logger.debug(f"Build on distro: {distro_string}")
+    logger.debug(f"Build on architecture: {arch_string}")
+
+    distro = platform_specific.get_distro_from_string(distro_string)
+    arch = platform_specific.get_arch_from_string(arch_string)
 
     logger.debug("Initializing command generators")
-    pm_command_generator = util.get_distro_pm_command_generator(distro)
-    dependencies = util.get_distro_package_name_dict(distro).values()
+    pm_command_generator = platform_specific.get_distro_pm_command_generator(distro)
+    dependencies = platform_specific.get_distro_package_name_dict(distro).values()
 
     nginx_builder_command_generator = builder.impl.NginxBuilderCommandGenerator(distro, arch)
     pcre2_builder_command_generator = builder.impl.PCRE2BuilderCommandGenerator(distro, arch)
@@ -58,7 +61,7 @@ def main(argc: int, argv: typing.List[str]):
         file.write("\n".join(command_list))
         file.write('\n')
 
-    tag = util.get_docker_image_tag(distro, arch)
+    tag = platform_specific.get_docker_image_tag(distro, arch)
     logger.info(f"Using docker image: {tag}")
 
     logger.debug(f"Initializing docker client")

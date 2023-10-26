@@ -1,0 +1,29 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      run_id_linux:
+        description: GitHub Actions Run ID for Releasing Linux Binary
+        required: true
+        type: string
+      run_id_docker:
+        description: GitHub Actions Run ID for Releasing Docker Image
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release-linux-binary:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    uses: ./.github/workflows/release-linux-binary.yaml
+    with:
+      run_id: ${{ inputs.run_id_linux }}
+
+  release-docker-image:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    uses: ./.github/workflows/release-docker-image.yaml
+    with:
+      run_id: ${{ inputs.run_id_docker }}
