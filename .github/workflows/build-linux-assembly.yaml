@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         distro: [ubuntu@jammy, archlinux]
-        arch: [amd64, arm64/v8]
+        arch: [amd64, arm64@v8]
     uses: ./.github/workflows/build-linux-binary.yaml
     with:
       distro: ${{ matrix.distro }}
