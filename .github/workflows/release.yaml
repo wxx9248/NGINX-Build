@@ -13,13 +13,13 @@ permissions:
 
 jobs:
   release-linux-binary:
-    if: ${{ github.ref == "refs/heads/master" }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     uses: ./.github/workflows/release-linux-binary.yaml
     with:
       run_id: ${{ inputs.run_id }}
 
   release-docker-image:
-    if: ${{ github.ref == "refs/heads/master" }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     uses: ./.github/workflows/release-docker-image.yaml
     with:
       run_id: ${{ inputs.run_id }}
