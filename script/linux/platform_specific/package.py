@@ -2,12 +2,12 @@
 import typing
 
 from package_manager.impl import *
+from .common import DistroType
 
 DISTRO_PM_GENERATOR_DICT = {
-    "focal": AptCommandGenerator,
-    "jammy": AptCommandGenerator,
-    "archlinux": PacmanCommandGenerator,
-    "alpine": ApkCommandGenerator
+    ("ubuntu", "jammy"): AptCommandGenerator(),
+    ("archlinux", ""): PacmanCommandGenerator(),
+    ("alpine", ""): ApkCommandGenerator()
 }
 
 UBUNTU_PACKAGE_NAME_DICT = {
@@ -29,9 +29,8 @@ UBUNTU_PACKAGE_NAME_DICT = {
 }
 
 DISTRO_PACKAGE_NAME_DICT = {
-    "focal": UBUNTU_PACKAGE_NAME_DICT,
-    "jammy": UBUNTU_PACKAGE_NAME_DICT,
-    "archlinux": {
+    ("ubuntu", "jammy"): UBUNTU_PACKAGE_NAME_DICT,
+    ("archlinux", ""): {
         "build-essential": "base-devel",
         "coreutils": "coreutils",
         "binutils": "binutils",
@@ -48,7 +47,7 @@ DISTRO_PACKAGE_NAME_DICT = {
         "automake": "automake",
         "linux-headers": "linux-headers"
     },
-    "alpine": {
+    ("alpine", ""): {
         "build-essential": "alpine-sdk",
         "coreutils": "coreutils",
         "binutils": "binutils",
@@ -68,9 +67,9 @@ DISTRO_PACKAGE_NAME_DICT = {
 }
 
 
-def get_distro_pm_command_generator(distro: str):
-    return DISTRO_PM_GENERATOR_DICT.get(distro)()
+def get_distro_pm_command_generator(distro: DistroType):
+    return DISTRO_PM_GENERATOR_DICT.get(distro)
 
 
-def get_distro_package_name_dict(distro: str) -> typing.Dict[str, str]:
+def get_distro_package_name_dict(distro: DistroType) -> typing.Dict[str, str]:
     return DISTRO_PACKAGE_NAME_DICT.get(distro)
