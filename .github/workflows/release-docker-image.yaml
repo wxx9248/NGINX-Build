@@ -14,6 +14,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          path: artifacts/
+        run: |
+          echo Hello world!
