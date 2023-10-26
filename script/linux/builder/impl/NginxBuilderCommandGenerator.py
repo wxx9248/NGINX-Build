@@ -3,6 +3,7 @@ import re
 import typing
 
 from builder.model import BuilderCommandGenerator
+from platform_specific import DistroType, ArchType
 
 CONFIGURE_COMMAND = "./auto/configure"
 
@@ -55,7 +56,7 @@ CONFIGURE_FLAGS_COMMON = [
 ]
 
 CONFIGURE_FLAGS_EXTRA = {
-    (r"focal|jammy", r".*"): [
+    ((r"ubuntu", r".*"), (r".*", r".*")): [
         "--prefix=/etc/nginx",
         "--sbin-path=/usr/sbin/nginx",
         "--modules-path=/usr/lib/nginx/modules",
@@ -77,7 +78,7 @@ CONFIGURE_FLAGS_EXTRA = {
         "--with-cc-opt='-g -O2 -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC'",
         "--with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie'"
     ],
-    (r"archlinux", r".*"): [
+    ((r"archlinux", r".*"), (r".*", r".*")): [
         "--prefix=/etc/nginx",
         "--sbin-path=/usr/bin/nginx",
         "--modules-path=/usr/lib/nginx/modules",
@@ -99,15 +100,15 @@ CONFIGURE_FLAGS_EXTRA = {
         # "--with-cc-opt=",
         # "--with-ld-opt="
     ],
-    (r"archlinux", r"amd64"): [
+    ((r"archlinux", r".*"), (r"amd64", r"")): [
         "--with-cc-opt='-march=x86-64 -mtune=generic -O2 -pipe -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fstack-clash-protection -fcf-protection -flto'",
-        "--with-ld-opt='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now -flto'"
+        "--with-ld-opt='-Wl,-O1,--sort-common.py,--as-needed,-z,relro,-z,now -flto'"
     ],
-    (r"archlinux", r"aarch64"): [
+    ((r"archlinux", r".*"), (r"arm64", r"v8")): [
         "--with-cc-opt='-march=armv8-a -O2 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fstack-clash-protection'",
-        "--with-ld-opt='-Wl,-O1,--sort-common,--as-needed,-z,relro,-z,now'"
+        "--with-ld-opt='-Wl,-O1,--sort-common.py,--as-needed,-z,relro,-z,now'"
     ],
-    (r"alpine", r".*"): [
+    ((r"alpine", r".*"), (r".*", r".*")): [
         "--prefix=/var/lib/nginx",
         "--sbin-path=/usr/sbin/nginx",
         "--modules-path=/usr/lib/nginx/modules",
@@ -133,14 +134,17 @@ CONFIGURE_FLAGS_EXTRA = {
 
 
 class NginxBuilderCommandGenerator(BuilderCommandGenerator):
-    def __init__(self, distro: str, arch: str):
+    def __init__(self, distro: DistroType, arch: ArchType):
         super().__init__(distro, arch)
 
     def configure(self) -> typing.List[str]:
         matched_extra = [
             value
             for (regex_distro, regex_arch), value in CONFIGURE_FLAGS_EXTRA.items()
-            if re.match(regex_distro, self.distro) and re.match(regex_arch, self.arch)
+            if re.match(regex_distro[0], self.distro[0])
+            and re.match(regex_distro[1], self.distro[1])
+            and re.match(regex_arch[0], self.arch[0])
+            and re.match(regex_arch[1], self.arch[1])
         ]
 
         configure_command_list = [CONFIGURE_COMMAND]
