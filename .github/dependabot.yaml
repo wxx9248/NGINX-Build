@@ -1,7 +1,5 @@
 version: 2
-permissions:
-  pull-requests: write
-  contents: write
+
 updates:
   - package-ecosystem: "pip"
     directory: "/script/linux/"
