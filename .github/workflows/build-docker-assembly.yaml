@@ -5,7 +5,7 @@ permissions:
   contents: write
 
 jobs:
-  main:
+  build-docker-assembly:
     strategy:
       matrix:
         distro: [alpine]

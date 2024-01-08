@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  main:
+  release-linux-binary:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
