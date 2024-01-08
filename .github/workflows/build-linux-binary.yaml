@@ -29,7 +29,7 @@ jobs:
       - name: Docker Setup QEMU
         uses: docker/setup-qemu-action@v3
       - name: Setup Python and pip
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: pip
@@ -40,7 +40,7 @@ jobs:
         run: |
           python3 ./script/linux/main.py
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nginx-${{ inputs.distro }}-${{ inputs.arch }}
           path: ./workspace/nginx/objs/nginx
