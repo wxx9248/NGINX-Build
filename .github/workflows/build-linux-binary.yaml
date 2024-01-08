@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  main:
+  build-linux-binary:
     runs-on: ubuntu-latest
     env:
       BUILD_DISTRO: ${{ inputs.distro }}
