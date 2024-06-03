@@ -1,6 +1,6 @@
 certifi==2024.6.2
 charset-normalizer==3.3.2
-docker==7.0.0
+docker==7.1.0
 idna==3.7
 packaging==24.0
 requests==2.31.0
