@@ -27,7 +27,7 @@ jobs:
         run: |
           bash ./patches/apply.sh
       - name: Docker Setup QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v3.2.0
       - name: Setup Python and pip
         uses: actions/setup-python@v5
         with:
