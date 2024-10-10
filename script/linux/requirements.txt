@@ -1,5 +1,5 @@
 certifi==2024.8.30
-charset-normalizer==3.3.2
+charset-normalizer==3.4.0
 docker==7.1.0
 idna==3.10
 packaging==24.1
