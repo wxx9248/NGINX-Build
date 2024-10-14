@@ -4,9 +4,6 @@
 [submodule "workspace/nginx"]
 	path = workspace/nginx
 	url = https://github.com/nginx/nginx
-[submodule "workspace/nginx-http-auth-digest"]
-	path = workspace/nginx-http-auth-digest
-	url = https://github.com/samizdatco/nginx-http-auth-digest
 [submodule "workspace/ngx_brotli"]
 	path = workspace/ngx_brotli
 	url = https://github.com/wxx9248/ngx_brotli
