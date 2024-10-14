@@ -41,7 +41,6 @@ CONFIGURE_FLAGS_COMMON = [
     "--with-stream_geoip_module",
     "--with-stream_ssl_preread_module",
 
-    "--add-module=../nginx-http-auth-digest",
     "--add-module=../ngx_brotli",
     "--add-module=../njs/nginx",
 
