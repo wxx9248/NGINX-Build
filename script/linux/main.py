@@ -67,7 +67,7 @@ def main(argc: int, argv: typing.List[str]):
     logger.debug(f"Initializing docker client")
     client = docker.from_env()
     container: Container = client.containers.run(
-        tag,
+        distro[0],
         f"sh -e -x ./{BUILD_SCRIPT_NAME}",
         auto_remove=True,
         environment={
