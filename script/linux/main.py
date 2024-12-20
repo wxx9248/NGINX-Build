@@ -83,7 +83,7 @@ def main(argc: int, argv: typing.List[str]):
         },
         working_dir=WORKSPACE_PATH_CONTAINER,
         detach=True,
-        platform=f"linux/{arch[0]}" + f"/{arch[1]}" if arch[1] != "" else ""
+        platform=f"linux/{arch[0]}" + (f"/{arch[1]}" if arch[1] != "" else "")
     )
     console = container.attach(stdout=True, stderr=True, stream=True, logs=True)
     line: bytes
