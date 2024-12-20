@@ -61,13 +61,16 @@ def main(argc: int, argv: typing.List[str]):
         file.write("\n".join(command_list))
         file.write('\n')
 
-    tag = platform_specific.get_docker_image_tag(distro, arch)
-    logger.info(f"Using docker image: {tag}")
-
+    image_repository = platform_specific.get_docker_image_repository(distro, arch)
+    image_platform = platform_specific.get_docker_image_platform(arch)
+    logger.info(f"Using docker image repository: {image_repository}")
+    logger.info(f"Using docker image platform: {image_platform}")
+    
     logger.debug(f"Initializing docker client")
     client = docker.from_env()
+    image = client.images.pull(image_repository, platform=image_platform)
     container: Container = client.containers.run(
-        distro[0],
+        image.id,
         f"sh -e -x ./{BUILD_SCRIPT_NAME}",
         auto_remove=True,
         environment={
@@ -82,8 +85,7 @@ def main(argc: int, argv: typing.List[str]):
             }
         },
         working_dir=WORKSPACE_PATH_CONTAINER,
-        detach=True,
-        platform=f"linux/{arch[0]}" + (f"/{arch[1]}" if arch[1] != "" else "")
+        detach=True
     )
     console = container.attach(stdout=True, stderr=True, stream=True, logs=True)
     line: bytes

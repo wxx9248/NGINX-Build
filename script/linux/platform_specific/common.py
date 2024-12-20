@@ -7,7 +7,6 @@ DistroType: typing.TypeAlias = typing.Tuple[str, str]
 ArchType: typing.TypeAlias = typing.Tuple[str, str]
 
 distro_dict: typing.Dict[str, DistroType] = {
-    "ubuntu@jammy": ("ubuntu", "jammy"),
     "archlinux": ("archlinux", ""),
     "alpine": ("alpine", "")
 }
