@@ -18,7 +18,8 @@ arch_dict: typing.Dict[str, ArchType] = {
     "arm32@v7": ("arm32", "v7"),
     "i386": ("i386", ""),
     "ppc64le": ("ppc64le", ""),
-    "s390x": ("s390x", "")
+    "s390x": ("s390x", ""),
+    "riscv64": ("riscv64", "")
 }
 
 
