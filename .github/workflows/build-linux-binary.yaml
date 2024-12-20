@@ -26,9 +26,6 @@ jobs:
       - name: Applying patches
         run: |
           bash ./patches/apply.sh
-      - name: Update environment
-        run: |
-          sudo apt update && sudo apt upgrade
       - name: Docker Setup QEMU
         uses: docker/setup-qemu-action@v3.2.0
       - name: Setup Python and pip
