@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         distro: [alpine]
-        arch: [amd64, arm64@v8, i386, ppc64le, riscv64]
+        arch: [amd64, arm64@v8, arm32@v6, arm32@v7, i386, ppc64le, riscv64]
     uses: ./.github/workflows/build-linux-binary.yaml
     with:
       distro: ${{ matrix.distro }}
