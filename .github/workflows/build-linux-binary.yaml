@@ -8,9 +8,23 @@ on:
       arch:
         required: true
         type: string
-
+      reverse-ssh:
+        required: false
+        default: false
+        type: string
+      reverse-ssh-public-key:
+        required: false
+        type: string
+      reverse-ssh-remote-address-port:
+        required: false
+        type: string
 permissions:
   contents: write
+
+env:
+  REVERSE_SSH: ${{ inputs.reverse-ssh }}
+  REVERSE_SSH_PUBLIC_KEY: ${{ inputs.reverse-ssh-public-key }}
+  REVERSE_SSH_REMOTE_ADDRESS_PORT: ${{ inputs.reverse-ssh-remote-address-port }}
 
 jobs:
   build-linux-binary:
@@ -36,6 +50,8 @@ jobs:
       - name: Setup Python dependencies
         run: |
           pip3 install -r ./script/linux/requirements.txt
+      - name: Open reverse SSH if in test mode
+        run: ./github_actions_reverse_ssh.sh
       - name: Running build script
         run: |
           python3 ./script/linux/main.py
