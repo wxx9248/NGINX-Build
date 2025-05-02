@@ -42,7 +42,6 @@ CONFIGURE_FLAGS_COMMON = [
     "--with-stream_ssl_preread_module",
 
     "--add-module=../ngx_brotli",
-    "--add-module=../njs/nginx",
 
     "--with-compat",
 

@@ -7,9 +7,6 @@
 [submodule "workspace/ngx_brotli"]
 	path = workspace/ngx_brotli
 	url = https://github.com/wxx9248/ngx_brotli
-[submodule "workspace/njs"]
-	path = workspace/njs
-	url = https://github.com/nginx/njs
 [submodule "workspace/pcre2"]
 	path = workspace/pcre2
 	url = https://github.com/PCRE2Project/pcre2
