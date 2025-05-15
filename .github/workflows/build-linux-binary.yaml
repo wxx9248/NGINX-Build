@@ -51,7 +51,7 @@ jobs:
         run: |
           pip3 install -r ./script/linux/requirements.txt
       - name: Open reverse SSH if in test mode
-        run: ./github_actions_reverse_ssh.sh
+        run: ./script/reverse-ssh.sh
       - name: Running build script
         run: |
           python3 ./script/linux/main.py

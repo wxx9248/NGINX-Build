@@ -1,0 +1,56 @@
+name: Check for Updated Submodules and Trigger Build
+on:
+  schedule:
+    - cron: '0 0 * * *' # every day at 00:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check-for-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Generate update summary
+        id: summary
+        run: |
+          # Run the checker: it stages any changes and emits a markdown summary
+          python ./script/updater/check-updates.py >summary.md
+
+          # Expose the summary for the PR body
+          echo "body <<EOF" >>$GITHUB_OUTPUT
+          cat summary.md >>$GITHUB_OUTPUT
+          echo "EOF" >>$GITHUB_OUTPUT
+
+      - name: Detect changes
+        run: |
+          [[ "$(cat summary.md)" == "" ]] || echo "::set-output name=has_changes::true"
+          rm summary.md || true
+        id: detect_changes
+        # Allow this step to "fail" without failing the job
+        continue-on-error: true
+
+      - name: Create Pull Request
+        if: steps.detect_changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          commit-message: "GitHub Actions: Submodule Update"
+          branch: actions/submodule-update
+          branch-suffix: short-commit-hash
+          title: "GitHub Actions: Submodule Update"
+          body: ${{ steps.summary.outputs.body }}
+          delete-branch: true
+          assignees: |
+            wxx9248
+          reviewers: |
+            wxx9248
