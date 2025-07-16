@@ -8,4 +8,4 @@ Automatic custom build of nginx with GitHub Actions
 | libressl | v4.1.0 |
 | pcre2 | pcre2-10.45 |
 | zlib | v1.3.1 |
-| ngx_brotli | 347db19479a752149d9660eedb4c34b906bdf4c2 |
+| ngx_brotli | 59194d5a21bce6f690c7db6a34b68e14c5927ba8 |
