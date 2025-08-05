@@ -2,10 +2,6 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      run_id_linux:
-        description: GitHub Actions Run ID for Releasing Linux Binary
-        required: true
-        type: string
       run_id_docker:
         description: GitHub Actions Run ID for Releasing Docker Image
         required: true
