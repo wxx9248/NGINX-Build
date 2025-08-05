@@ -1,4 +1,4 @@
-FROM nginx:1.25.3-alpine
+FROM nginx:1-alpine-slim
 LABEL maintainer="wxx9248 <wxx9248@wxx9248.top>"
 ARG TARGETARCH
 ARG TARGETVARIANT
