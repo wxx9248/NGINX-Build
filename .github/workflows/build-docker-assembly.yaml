@@ -1,7 +1,9 @@
 name: Build Docker Assembly
 on:
+  workflow_dispatch:
   pull_request:
   repository_dispatch:
+    types: ["Pull Request Build (Triggered by GitHub Actions)"]
 
 permissions:
   contents: write
@@ -16,3 +18,4 @@ jobs:
     with:
       distro: ${{ matrix.distro }}
       arch: ${{ matrix.arch }}
+      checkout_ref: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.pr_head_ref || '' }}

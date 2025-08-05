@@ -18,6 +18,10 @@ on:
       reverse-ssh-remote-address-port:
         required: false
         type: string
+      checkout_ref:
+        required: false
+        type: string
+        description: "Optional ref to checkout (for repository_dispatch events)"
 permissions:
   contents: write
 
@@ -37,6 +41,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          ref: ${{ inputs.checkout_ref || github.head_ref || github.ref }}
       - name: Applying patches
         run: |
           bash ./patches/apply.sh
