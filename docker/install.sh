@@ -28,6 +28,9 @@ case "$target_platform" in
     "ppc64le")
         cp "/build/nginx-alpine-ppc64le/nginx" /usr/sbin/
         ;;
+    "riscv64")
+        cp "/build/nginx-alpine-riscv64/nginx" /usr/sbin/
+        ;;
     *)
         echo Unknown platform: "$target_platform"
         exit 1
