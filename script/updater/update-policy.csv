@@ -1,5 +1,6 @@
 libressl,tag,
 nginx,tag,
-ngx_brotli,branch,master
+brotli,branch,master
 pcre2,tag,
 zlib,tag,
+zstd,branch,master
