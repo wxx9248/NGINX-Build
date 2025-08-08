@@ -5,7 +5,7 @@
 	path = workspace/nginx
 	url = https://github.com/nginx/nginx
 [submodule "workspace/ngx_brotli"]
-	path = workspace/ngx_brotli
+	path = workspace/brotli
 	url = https://github.com/wxx9248/ngx_brotli
 [submodule "workspace/pcre2"]
 	path = workspace/pcre2
@@ -13,3 +13,6 @@
 [submodule "workspace/zlib"]
 	path = workspace/zlib
 	url = https://github.com/madler/zlib
+[submodule "workspace/zstd"]
+	path = workspace/zstd
+	url = https://github.com/tokers/zstd-nginx-module

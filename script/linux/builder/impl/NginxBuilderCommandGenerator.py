@@ -41,7 +41,8 @@ CONFIGURE_FLAGS_COMMON = [
     "--with-stream_geoip_module",
     "--with-stream_ssl_preread_module",
 
-    "--add-module=../ngx_brotli",
+    "--add-module=../brotli",
+    "--add-module=../zstd",
 
     "--with-compat",
 
