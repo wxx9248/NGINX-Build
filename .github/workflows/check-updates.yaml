@@ -57,7 +57,7 @@ jobs:
         id: create_pr
 
       - name: Get PR Information
-        if: steps.detect_changes.outputs.has_changes == 'true' && github.actor == 'github-actions[bot]'
+        if: steps.detect_changes.outputs.has_changes == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         run: |
           # Get the PR number from the create-pull-request action output
           PR_NUMBER="${{ steps.create_pr.outputs.pull-request-number }}"
@@ -76,7 +76,7 @@ jobs:
 
       - name: Trigger GitHub Actions with Repository Dispatch
         uses: peter-evans/repository-dispatch@v3
-        if: steps.detect_changes.outputs.has_changes == 'true' && github.actor == 'github-actions[bot]'
+        if: steps.detect_changes.outputs.has_changes == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         with:
           token: ${{ secrets.WEBHOOK_TOKEN }}
           repository: wxx9248/NGINX-Build
