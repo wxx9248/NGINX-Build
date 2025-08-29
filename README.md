@@ -6,7 +6,7 @@ Automatic custom build of nginx with GitHub Actions
 |--|--|
 | nginx | release-1.29.1 |
 | libressl | v4.1.0 |
-| pcre2 | pcre2-10.45 |
+| pcre2 | pcre2-10.46 |
 | zlib | v1.3.1 |
-| brotli | 3a93f9ef0047b6b670bb70fac9e683edff07daeb |
+| brotli | 7affe03de368104e187dc075efc2b59ec421f81a |
 | zstd | 057a7d339af1111d04b5a9ac5ae9b0250d17cd94 |
