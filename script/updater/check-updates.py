@@ -32,10 +32,10 @@ def get_latest_tag(path: Path):
     # fetch all tags so that we have the latest metadata
     run(['git', 'fetch', '--tags'], cwd=path)
 
-    # list tags sorted by creation date (newest first)
+    # list tags sorted by version (newest first)
     tags = run([
         'git', 'for-each-ref',
-        '--sort=-creatordate',
+        '--sort=-version:refname',
         '--format=%(refname:short)',
         'refs/tags'
     ], cwd=path).splitlines()
