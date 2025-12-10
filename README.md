@@ -4,7 +4,7 @@ Automatic custom build of nginx with GitHub Actions
 ## Current Version
 | Components | Commit Tag |
 |--|--|
-| nginx | release-1.29.3 |
+| nginx | release-1.29.4 |
 | libressl | v4.2.1 |
 | pcre2 | pcre2-10.47 |
 | zlib | v1.3.1.2 |
