@@ -5,7 +5,7 @@ Automatic custom build of nginx with GitHub Actions
 | Components | Commit Tag |
 |--|--|
 | nginx | release-1.30.0 |
-| libressl | v4.2.1 |
+| libressl | v4.3.1 |
 | pcre2 | pcre2-10.47 |
 | zlib | v1.3.2 |
 | brotli | 72c01fbc1b05941343397d1792a348e9c9423290 |
