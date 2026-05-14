@@ -4,9 +4,9 @@ Automatic custom build of nginx with GitHub Actions
 ## Current Version
 | Components | Commit Tag |
 |--|--|
-| nginx | release-1.30.0 |
+| nginx | release-1.31.0 |
 | libressl | v4.3.1 |
 | pcre2 | pcre2-10.47 |
 | zlib | v1.3.2 |
-| brotli | 2bf25b72128d3e4d1c4c0983f39e55e30e1f2d58 |
+| brotli | 2ad308380b20e9417451181accf4c3e19167ade4 |
 | zstd | 057a7d339af1111d04b5a9ac5ae9b0250d17cd94 |
