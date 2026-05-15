@@ -1,6 +1,0 @@
-libressl,tag,
-nginx,tag,
-brotli,branch,master
-pcre2,tag,
-zlib,tag,
-zstd,branch,master
