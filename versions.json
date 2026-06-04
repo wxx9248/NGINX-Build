@@ -16,7 +16,7 @@
     "policy": "tag"
   },
   "brotli": {
-    "version": "26fbc759528e16849d6da24debee7b3f7a2382cb",
+    "version": "e14e53e634dc486f0159c1f1b5f2751639f1c392",
     "policy": "branch",
     "branch": "master"
   },
