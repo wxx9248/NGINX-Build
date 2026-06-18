@@ -1,6 +1,6 @@
 {
   "nginx": {
-    "version": "release-1.31.1",
+    "version": "release-1.31.2",
     "policy": "tag"
   },
   "libressl": {
