@@ -1,6 +1,6 @@
 {
   "nginx": {
-    "version": "release-1.31.2",
+    "version": "release-1.31.3",
     "policy": "tag"
   },
   "libressl": {
@@ -16,7 +16,7 @@
     "policy": "tag"
   },
   "brotli": {
-    "version": "a2d409236100a33d224cf2befc647dfec23dd750",
+    "version": "49e317aa4aa0bdba3bcc45d0d4e832573699d945",
     "policy": "branch",
     "branch": "master"
   },
