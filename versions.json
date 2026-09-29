@@ -8,7 +8,7 @@
     "policy": "tag"
   },
   "pcre2": {
-    "version": "pcre2-10.48-RC1",
+    "version": "pcre2-10.49",
     "policy": "tag"
   },
   "zlib": {
@@ -16,7 +16,7 @@
     "policy": "tag"
   },
   "brotli": {
-    "version": "40a0422480ca0cfb5f5299db201a4b70b1795bb1",
+    "version": "1bbe5ae65b31defca256ff6d7e7a7cb23c5d1317",
     "policy": "branch",
     "branch": "master"
   },
