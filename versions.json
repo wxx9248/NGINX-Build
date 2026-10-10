@@ -4,7 +4,7 @@
     "policy": "tag"
   },
   "libressl": {
-    "version": "v4.3.2",
+    "version": "v4.4.0rc1",
     "policy": "tag"
   },
   "pcre2": {
@@ -16,7 +16,7 @@
     "policy": "tag"
   },
   "brotli": {
-    "version": "9a391af3ec9d2a75c82584e19bef68b111963020",
+    "version": "ab2d8392436d6fe1570f38fe2edcdd8b7441503e",
     "policy": "branch",
     "branch": "master"
   },
