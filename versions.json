@@ -1,10 +1,10 @@
 {
   "nginx": {
-    "version": "release-1.31.6",
+    "version": "release-1.31.7",
     "policy": "tag"
   },
   "libressl": {
-    "version": "v4.3.2",
+    "version": "v4.4.0rc1",
     "policy": "tag"
   },
   "pcre2": {
@@ -16,7 +16,7 @@
     "policy": "tag"
   },
   "brotli": {
-    "version": "9a391af3ec9d2a75c82584e19bef68b111963020",
+    "version": "96b7fed2cd9583eb90b590173c1eab3c02c4eadf",
     "policy": "branch",
     "branch": "master"
   },
