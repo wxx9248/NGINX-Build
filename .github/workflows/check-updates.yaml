@@ -7,6 +7,10 @@ on:
 jobs:
   check-for-update:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -56,29 +60,11 @@ jobs:
             wxx9248
         id: create_pr
 
-      - name: Get PR Information
+      # Pull requests opened with GITHUB_TOKEN do not trigger pull_request workflows,
+      # but workflow_dispatch is exempt. Dispatching on the PR branch makes the run's
+      # GITHUB_SHA the PR head, so its checks attach to the PR and can gate the merge.
+      - name: Build the update branch
         if: steps.detect_changes.outputs.has_changes == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
-        run: |
-          # Get the PR number from the create-pull-request action output
-          PR_NUMBER="${{ steps.create_pr.outputs.pull-request-number }}"
-          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
-          
-          # Get PR details using GitHub API
-          PR_INFO=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER")
-          
-          HEAD_REF=$(echo "$PR_INFO" | jq -r '.head.ref')
-          BASE_REF=$(echo "$PR_INFO" | jq -r '.base.ref')
-          
-          echo "pr_head_ref=$HEAD_REF" >> $GITHUB_OUTPUT
-          echo "pr_base_ref=$BASE_REF" >> $GITHUB_OUTPUT
-        id: pr_info
-
-      - name: Trigger GitHub Actions with Repository Dispatch
-        uses: peter-evans/repository-dispatch@v4
-        if: steps.detect_changes.outputs.has_changes == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
-        with:
-          token: ${{ secrets.WEBHOOK_TOKEN }}
-          repository: wxx9248/NGINX-Build
-          event-type: Pull Request Build (Triggered by GitHub Actions)
-          client-payload: '{"pr_number": "${{ steps.pr_info.outputs.pr_number }}", "pr_head_ref": "${{ steps.pr_info.outputs.pr_head_ref }}", "pr_base_ref": "${{ steps.pr_info.outputs.pr_base_ref }}"}'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run build-docker-assembly.yaml --repo "${{ github.repository }}" --ref "${{ steps.create_pr.outputs.pull-request-branch }}"
