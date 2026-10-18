@@ -4,7 +4,7 @@
     "policy": "tag"
   },
   "libressl": {
-    "version": "v4.4.0rc1",
+    "version": "v4.3.3",
     "policy": "tag"
   },
   "pcre2": {

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -8,6 +9,9 @@ ROOT = Path(".")
 VERSIONS = ROOT / 'versions.json'
 WORKSPACE = ROOT / 'workspace'
 README = ROOT / 'README.md'
+
+# Pre-release suffixes (v4.4.0rc1, pcre2-10.50-RC1, ...) must not be adopted
+PRERELEASE = re.compile(r'[-._]?(alpha|beta|rc|pre|dev)[-._]?\d*$', re.IGNORECASE)
 
 TABLE_HEADER = ['| Components | Commit Tag |', '|--|--|']
 
@@ -35,6 +39,7 @@ def get_latest_tag(path: Path):
         '--format=%(refname:short)',
         'refs/tags'
     ], cwd=path).splitlines()
+    tags = [tag for tag in tags if not PRERELEASE.search(tag)]
     return tags[0] if tags else None
 
 
