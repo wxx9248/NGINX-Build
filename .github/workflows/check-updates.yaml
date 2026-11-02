@@ -35,7 +35,7 @@ jobs:
 
       - name: Detect changes
         run: |
-          [[ "$(cat summary.md)" == "" ]] || echo "::set-output name=has_changes::true"
+          [[ "$(cat summary.md)" == "" ]] || echo "has_changes=true" >>"$GITHUB_OUTPUT"
           rm summary.md || true
         id: detect_changes
         # Allow this step to "fail" without failing the job
