@@ -19,7 +19,7 @@ on:
         required: false
         type: string
 permissions:
-  contents: write
+  contents: read
 
 env:
   REVERSE_SSH: ${{ inputs.reverse-ssh }}
