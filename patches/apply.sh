@@ -27,3 +27,13 @@ if ! grep -B1 -q '^commit=`git -C openbsd rev-list ' "$UPDATE_SH" ||
     echo "patches/apply.sh: could not re-open the set +e window in $UPDATE_SH; upstream changed it" >&2
     exit 1
 fi
+
+# portable v4.4.0 ships patches/cert.pem.patch, which takes cert.pem from rev 1.36 to 1.37 (the
+# eMudhra intermediate revocation). OpenBSD's libressl-v4.4.0 tag already carries that change as
+# stable-branch rev 1.36.2.1, so both hunks fail and update.sh aborts. Patched 1.37 and 1.36.2.1
+# are identical apart from the RCS id line (126 certificates each). Drop the redundant patch for
+# this exact version only, so a later version that ships it again still gets applied, and fails
+# loudly if it does not fit.
+if [ "$LIBRESSL_VERSION" = "v4.4.0" ]; then
+    rm -f ./workspace/libressl/patches/cert.pem.patch
+fi
